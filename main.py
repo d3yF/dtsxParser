@@ -11,5 +11,3 @@ resultFileDir = r"C:\devGIT\dtsxParser\ResultFiles"
 if __name__ == "__main__":
     extractsql(sourceFileDir, intermediateFileDir)
     parseSql(intermediateFileDir, resultFileDir)
-
-

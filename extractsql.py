@@ -8,9 +8,7 @@ def extractsql(sourceFileDir, intermediateFileDir):
     
     for file in os.listdir(sourceFileDir):
         fileName = os.path.basename(file) 
-        #ntpath.basename(file)
         tree = etree.parse(f"{sourceFileDir}\{fileName}") 
-        #(f'{basename}.dtsx')
         root = tree.getroot()
     
         ele_set = set()
@@ -19,7 +17,7 @@ def extractsql(sourceFileDir, intermediateFileDir):
         print(ele_set)
         print(len(ele_set))
     
-    
+
         total_bytes = 0
         package_name = root.attrib['{www.microsoft.com/SqlServer/Dts}ObjectName'].replace(" ","")
         for cnt, ele in enumerate(root.xpath(".//*")):
