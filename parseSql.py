@@ -23,7 +23,6 @@ def parseSql(intermediateFileDir, resultFileDir):
         for pattern in keywords:
             for line in lines:
                 if (line.__contains__(pattern)) and (not line.__contains__("fetch next")):
-                    #reg = '[^\s]+'
                     reg = '[^\s|^-]+'
                     newline = line[line.index(pattern) + len(pattern):].strip()
                     if (len(newline) > 0):
