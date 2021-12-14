@@ -4,8 +4,8 @@ import re
 
 def parseSql(intermediateFileDir, resultFileDir):
     
-    pattern = ['from','exec' ,'insert into','delete from', 'into']
-    #resultFiledir = r"C:\\Users\\dodler\\Desktop\\CP\\ResultFiles\\"
+    keywords = ['from','exec' ,'insert into','delete from', 'into', 'drop table', 'select * into']
+
     if not os.path.isdir(resultFileDir):
         os.makedirs(resultFileDir)
 
@@ -17,14 +17,19 @@ def parseSql(intermediateFileDir, resultFileDir):
 
         with open(f"{intermediateFileDir}\{fileName}" , 'r') as source:
             for sourceline in source.readlines():             
-                sourceline = sourceline.lower()                
+                sourceline = sourceline.lower().rstrip()                
                 lines.add(sourceline)
 
-        for elem in pattern:
+        for pattern in keywords:
             for line in lines:
-                if (line.__contains__(elem)) and (not line.__contains__("fetch next")):
-                    with open(f"{resultFileDir}\{outputFile}", mode= 'a' ) as rsltfl:
-                        rsltfl.writelines(line)
+                if (line.__contains__(pattern)) and (not line.__contains__("fetch next")):
+                    #reg = '[^\s]+'
+                    reg = '[^\s|^-]+'
+                    newline = line[line.index(pattern) + len(pattern):].strip()
+                    if (len(newline) > 0):
+                        result = re.search(reg, newline)
+                        with open(f"{resultFileDir}\{outputFile}", mode= 'a' ) as rsltfl:
+                            rsltfl.writelines(result.group() + '\n')
 
 
 

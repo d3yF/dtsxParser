@@ -3,13 +3,13 @@ from extractsql import extractsql
 from parseSql import parseSql
 # from lxml import etree
 
-sourceFileDir = r"C:\Users\dodler\Desktop\CP\SourceFiles"
-intermediateFileDir = r"C:\Users\dodler\Desktop\CP\IntermediateFiles"
-resultFileDir = r"C:\Users\dodler\Desktop\CP\ResultFiles"
+sourceFileDir = r"C:\devGIT\dtsxParser\SourceFiles"
+intermediateFileDir = r"C:\devGIT\dtsxParser\IntermediateFiles"
+resultFileDir = r"C:\devGIT\dtsxParser\ResultFiles"
 
 
 if __name__ == "__main__":
-    extractsql(sourceFileDir)
+    extractsql(sourceFileDir, intermediateFileDir)
     parseSql(intermediateFileDir, resultFileDir)
 
 
